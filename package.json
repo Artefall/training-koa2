@@ -4,8 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "neutrino start --use neutrino-preset-koa",
-    "build": "neutrino build --use neutrino-preset-koa",
+    "start": "neutrino start",
+    "build": "neutrino build",
+    "lint": "neutrino lint",
+    "nkstart": "neutrino start --use neutrino-preset-koa",
+    "nkbuild": "neutrino build --use neutrino-preset-koa",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -17,7 +20,8 @@
     "koa-router": "^7.4.0"
   },
   "devDependencies": {
-    "neutrino": "^8.2.3",
+    "@atomspace/eslint": "^2.1.1",
+    "neutrino": "^8.3.0",
     "neutrino-preset-koa": "^1.0.0"
   }
 }
