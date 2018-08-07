@@ -4,7 +4,7 @@ let storage = new Storage('data.json');
 
 export default {
     get(fullFileName,key){
-        new Promise((resolve,reject) => {
+        return new Promise((resolve,reject) => {
             resolve(fullFileName,key)
         })
         .then((fullFileName,key) => {
@@ -28,7 +28,7 @@ export default {
         
     },
     set(fullFileName,key,newValue){
-        new Promise((resolve,reject) => {
+        return new Promise((resolve,reject) => {
             resolve(fullFileName,key,newValue)
         })
         .then((fullFileName,key,newValue) => {
