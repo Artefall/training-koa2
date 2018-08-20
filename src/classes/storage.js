@@ -1,40 +1,81 @@
-let fs = require('fs');
-let example = require('./example.js');
+import fs from 'fs';
 
-class Storage {
+import example from './example';
+
+
+export default class Storage {
 	constructor(fileName) {
 
 		this.whenReady = Promise.resolve();
 		this.fileName = fileName;
-		this.fullFileName = fileName + ".json";
-		fs.writeFile(fullFileName, JSON.stringify(example));
+		this.fullFileName = `${fileName}.json`;
+		fs.writeFile(this.fullFileName, JSON.stringify(example));
 		this.value = JSON.stringify(example);
 	}
-	// get() {
-	// 	return this.whenReady = this.whenReady.then(() => {
-	// 		return delay(1000);
-	// 	}).then(() => {
-	// 		return 64;
-	// 	});
-	// 	return this.whenReady;
-	// }
+	get(key) {
+		this.fullFileName = this.fullFileName;
+		return new Promise((resolve, reject) => {
+			resolve(key);
+		})
+			.then(key => {
+				let jsonObject = fs.readFile(this.fullFileName, (err, data) => {
+					if (err) {
+						reject();
+					}
+					else {
+						resolve({ key, data });
+					}
+				});
 
-	// set() {
-	// 	this.whenReady = this.whenReady.then(() => {
-	// 		return delay(500);
-	// 	}).then(() => {
-	// 		return 28;
-	// 	});
-	// 	return this.whenReady;
-	// }
+				return;
+			})
+			.then(({ key, data }) => {
+				let jsObject = JSON.parse(jsonObject);
+				let value = jsObject.key;
+
+				resolve(value);
+			})
+			.catch(() => {
+				reject();
+			});
+	}
+
+	set(key, newValue) {
+		this.fullFileName = this.fullFileName;
+		return new Promise((resolve, reject) => {
+			resolve(key, newValue);
+		})
+			.then((key, newValue) => {
+				let jsonObject = fs.readFile(this.fullFileName, (err, data) => {
+					if (err) {
+						reject();
+					}
+					else {
+						resolve(key, newValue, data);
+					}
+				})
+					.then((key, newValue) => {
+						let jsObject = JSON.parse(jsonObject);
+
+						jsObject.key = newValue;
+						let newJsonObject = JSON.stringify(jsObject);
+
+						fs.writeFile(this.fullFileName, newJsonObject, () => {
+							resolve();
+						});
+					})
+					.catch(() => {
+						reject();
+					});
+			});
+	}
+
+	remove(key) {
+		return new Promise((resolve, reject) => {
+			resolve(key);
+		})
+			.then(key => {
+				delete this[key];
+			});
+	}
 }
-
-let store = new Storage("boby");
-
-// store.set().then((number) => {
-// 	console.log(number);
-// });
-// store.get().then((number) => {
-// 	console.log(number);
-// });
-

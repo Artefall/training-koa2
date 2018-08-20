@@ -4,11 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "neutrino start",
+    "start": "neutrino start --debug",
     "build": "neutrino build",
     "lint": "neutrino lint",
-    "nkstart": "neutrino start --use neutrino-preset-koa",
-    "nkbuild": "neutrino build --use neutrino-preset-koa",
+    "nkstart": "neutrino start",
+    "nkbuild": "neutrino build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -22,6 +22,6 @@
   "devDependencies": {
     "@atomspace/eslint": "^2.1.1",
     "neutrino": "^8.3.0",
-    "neutrino-preset-koa": "^1.0.0"
+    "neutrino-preset-koa": "^1.0.1"
   }
 }

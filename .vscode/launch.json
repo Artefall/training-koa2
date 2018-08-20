@@ -6,9 +6,9 @@
 	"configurations": [
 		{
 			"type": "node",
-			"request": "launch",
-			"name": "Запустить программу",
-			"program": "${workspaceFolder}\\src/classes/storage.js"
+			"request": "attach",
+			"name": "Attach",
+			"port": 9230
 		}
 	]
 }
