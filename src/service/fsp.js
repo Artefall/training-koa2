@@ -1,47 +1,32 @@
 import fs from 'fs';
 
-export default obj = {
-	readFilePromise: (link, callback) => {
+export default {
+	readFilePromise: link => {
 		return new Promise((resolve, reject) => {
 			fs.readFile(link, (err, data) => {
 				if (err) {
-					reject();
-				}else{
+					reject(err);
+				}
+				else {
 					resolve(data);
 				}
-			})
-			.then((data) => {
-				callback();
-				resolve();
-			})
-			.then((data) => {
-				resolve(data);
-			},
-			() => {
-				reject()
-			}
-		);
-		}
+			});
+		});
 	},
-	writeFilePromise:(file,data,callback) => {
-		return new Promise((resolve,reject) => {
-			fs.writeFile(file,data,(err) => {
-				if (err){
-					reject();
-				}else{
-					resolve();
+	writeFilePromise: (file, data) => {
+		return new Promise((resolve, reject) => {
+			fs.writeFile(file, data, err => {
+				if (err) {
+					reject(err);
 				}
-			})
-		})
-		.then(() => {
-			callback();
-			resolve();
-		})
-		.catch(() => {
-			reject();
+				else {
+					resolve(data);
+				}
+			});
+
 		});
 
-		
+
 	}
 
 };

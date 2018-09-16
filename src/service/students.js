@@ -1,48 +1,83 @@
+import fsp from '../service/fsp';
+
 let Storage = require('../classes/storage');
 
-let storage = new Storage('data.json');
+let storage = new Storage('data');
 
-// export default {
-//     get(fullFileName,key){
-//         return new Promise((resolve,reject) => {
-//             resolve(fullFileName,key)
-//         })
-//         .then((fullFileName,key,data) => {
-//             let jsObject = JSON.parse(jsonObject);
-//             let value = jsObject.key;
-//             resolve(value);
-//         })
-//         .catch(() => {
-//             reject();
-//         })
-        
-        
-//     },
-//     set(fullFileName,key,newValue){
-//         return new Promise((resolve,reject) => {
-//             resolve(fullFileName,key,newValue)
-//         })
-//         .then((fullFileName,key,newValue) => {
-//             let jsonObject = fs.readFile(fullFileName,(err,data) => {
-//                 if(err){
-//                     reject();
-//                 }else{
-//                     resolve(fullFileName,key,newValue,data);
-//                 }
-//             })
-//         .then((fullFileName,key,newValue) => {
-//             let jsObject = JSON.parse(jsonObject);
-//             jsObject.key = newValue;
-//             let newJsonObject = JSON.stringify(jsObject);
-//             fs.writeFile(fullFileName , newJsonObject, () => {
-//                 resolve();
-//             })
-//         })
-//         .catch(() => {
-//             reject();
-//         });
-//         })
-        
-        
-//     },
-// }
+export default {
+	get (id, key) {
+		return storage.get()
+		.then(read => {
+			let collection = JSON.parse(read);
+			let value;
+
+			if (key) {
+				value = collection[id][key];
+			}
+			else {
+				value = collection[id];
+			}
+			return value;
+		});
+	},
+	set (id, student) {
+		return storage.set(id, student)
+		.then(() => {
+			return fsp.writeFilePromise(storage.fileName, storage.value);
+
+		})
+		.catch(err => {
+			throw new Error(err);
+		});
+	},
+
+	getAll (key) {
+		return storage.get()
+		.then(data => {
+			let jsArr = JSON.parse(data);
+
+			let keyArray = [];
+
+			for (let propMas of jsArr) {
+				let keyValue = propMas[key];
+
+				keyArray.push(keyValue);
+			}
+			return keyArray;
+		})
+		.catch(err => {
+			throw new Error(err);
+		});
+	},
+	remove (id) {
+		return storage.remove(id)
+		.then(data => {
+			fsp.writeFilePromise(storage.fileName, data);
+			return;
+		});
+
+	},
+	add ({ students }) {
+		return students.get()
+			.then(data => {
+				jsArr = JSON.parse(data);
+
+				if (students != object){
+					throw new Error('Wryyy');
+				}else{
+					jsArr.push(students);
+				}
+				let newJsonObject = JSON.stringify(jsObject);
+				
+				fsp.writeFilePromise(storage.fileName, newJsonObject);
+			})
+			.catch(() => {
+				throw new Error('Error'); 
+			});
+			
+
+				
+			}
+		});
+	}
+};
