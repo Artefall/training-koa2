@@ -34,11 +34,11 @@ export default {
 	getAll (key) {
 		return storage.get()
 		.then(data => {
-			let jsArr = JSON.parse(data);
+			let collection = JSON.parse(data);
 
 			let keyArray = [];
 
-			for (let propMas of jsArr) {
+			for (let propMas of collection) {
 				let keyValue = propMas[key];
 
 				keyArray.push(keyValue);
@@ -60,24 +60,21 @@ export default {
 	add ({ students }) {
 		return students.get()
 			.then(data => {
-				jsArr = JSON.parse(data);
+				let collection = JSON.parse(data);
 
-				if (students != object){
-					throw new Error('Wryyy');
-				}else{
-					jsArr.push(students);
+				if (students === Object) {
+					collection.push(students);
 				}
-				let newJsonObject = JSON.stringify(jsObject);
-				
-				fsp.writeFilePromise(storage.fileName, newJsonObject);
+				else {
+					throw new Error('Wryyy');
+				}
+
+				let newJsonObject = JSON.stringify(collection);
+
+				return fsp.writeFilePromise(storage.fileName, newJsonObject);
 			})
 			.catch(() => {
-				throw new Error('Error'); 
+				throw new Error('Error');
 			});
-			
-
-				
-			}
-		});
 	}
 };
