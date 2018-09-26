@@ -1,38 +1,32 @@
 // import path from 'path';
 
 import Koa from 'koa';
+import body from 'koa-json-body';
+
+// import cors from 'koa2-cors';
 
 import router from './router';
 
 // import fsp from './service/fsp';
 
 export default new Koa()
+	.use(body({ limit: '10kb', fallback: true }))
+
+	// .use(cors({
+	// 	// origin (ctx) {
+	// 	// 	if (ctx.url === '/test') {
+	// 	// 		return false;
+	// 	// 	}
+	// 	// 	return '*';
+	// 	// },
+	// 	exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'],
+	// 	maxAge: 5,
+	// 	credentials: true,
+	// 	allowMethods: ['GET', 'POST', 'DELETE', 'PUT'],
+	// 	allowHeaders: ['Content-Type', 'Authorization', 'Accept']
+	// }))
 	.use(router.routes())
 	.use(router.allowedMethods())
 	.on('error', function (err, ctx) {
 		console.error(err, ctx);
 	});
-
-// fsp.readFilePromise('./test.txt')
-// 	.then(() => {
-// 		console.log('Leather');
-// 		return true;
-// 	})
-// 	.catch(err => {
-// 		console.error(err);
-// 	});
-// fsp.writeFilePromise('./test.txt', 'Get back,JoJo')
-// 	.then(() => {
-// 		console.log('Hello');
-// 		return true;
-// 	})
-// 	.catch(() => {
-// 		console.error('Nope?');
-// 	});
-
-// console.log(__dirname, __filename);
-// console.log(process.cwd());
-
-// let name = 'fileTest';
-
-// console.log(path.join(process.cwd(), name));
