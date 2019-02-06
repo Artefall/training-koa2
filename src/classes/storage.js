@@ -1,23 +1,36 @@
-import path from 'path';
-
 import fsp from '../service/fsp';
 
 export default class Storage {
 	constructor (name) {
 
 		this.name = name;
-		this.fileName = path.join(process.cwd(), `${name}.json`);
-		this.whenReady = fsp.readFilePromise(this.fileName)
+
+		this.fileName = `${name}.json`;
+
+		let value;
+
+		fsp.readFilePromise('example.json')
 			.then(data => {
+				// console.log(`steel dan${data}`);
 				return JSON.parse(data);
 			})
 			.then(data => {
+				value = data;
 				return data;
 			})
 			.catch(() => {
 				throw new Error();
 			});
-		this.value = JSON.parse(`${name}.json`);
+
+		console.log(`Value:${value}`);
+
+		this.value = value;
+		console.log(`this.value:${this.value}`);
+
+		fsp.writeFilePromise(this.fileName, this.value)
+			.catch(() => {
+				throw new Error();
+			});
 	}
 
 	get () {

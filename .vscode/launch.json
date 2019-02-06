@@ -5,10 +5,18 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
+			
+			"name": "Debug",
 			"type": "node",
-			"request": "attach",
-			"name": "Attach",
-			"port": 9230
+			"request": "launch",
+			"program": "${workspaceRoot}/node_modules/neutrino/bin/neutrino.js",
+			"args": [
+				"start",
+				"--debug"
+			],
+			"autoAttachChildProcesses": true,
+			"internalConsoleOptions": "openOnFirstSessionStart"
 		}
+		
 	]
 }

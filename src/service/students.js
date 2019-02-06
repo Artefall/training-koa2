@@ -1,6 +1,5 @@
 import fsp from '../service/fsp';
-
-let Storage = require('../classes/storage');
+import Storage from '../classes/storage';
 
 let storage = new Storage('data');
 

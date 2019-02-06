@@ -8,6 +8,7 @@ export default {
 					reject(err);
 				}
 				else {
+					console.log(`Killer queeASddawefsaerALDFMSFDKGMFDKn! ${data}`);
 					resolve(data);
 				}
 			});
@@ -20,6 +21,7 @@ export default {
 					reject(err);
 				}
 				else {
+					console.log(`Killer queen bites the dust! ${data}`);
 					resolve(data);
 				}
 			});
