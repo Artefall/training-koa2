@@ -9,18 +9,21 @@
     "lint": "neutrino lint",
     "nkstart": "neutrino start",
     "nkbuild": "neutrino build",
-    "test": "neutrino test --use @neutrinojs/node @neutrinojs/jest"
+    "test": "neutrino test"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@koa/cors": "^2.2.2",
+    "async-json-parser": "0.0.5",
     "cors": "^2.8.4",
+    "fs-extra": "^7.0.1",
     "koa": "^2.5.1",
     "koa-json-body": "^5.3.0",
     "koa-router": "^7.4.0",
-    "koa2-cors": "^2.0.6"
+    "koa2-cors": "^2.0.6",
+    "ramda": "^0.26.1"
   },
   "devDependencies": {
     "@atomspace/eslint": "^2.1.1",

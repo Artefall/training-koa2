@@ -9,9 +9,7 @@ export default new Koa()
 
 	.use(cors({
 		origin (ctx) {
-			if (ctx.url === '/test') {
-				return false;
-			}
+			if (ctx.url === '/test') return false;
 			return '*';
 		},
 		exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'],
@@ -22,8 +20,6 @@ export default new Koa()
 	}))
 	.use(router.routes())
 	.use(router.allowedMethods())
-	.on('error', function (err, ctx) {
+	.on('error', (err, ctx) => {
 		console.error(err, ctx);
 	});
-
-	//manageStudents

@@ -13,3 +13,10 @@
 ## Описание
 
 Создать Backend API для создания, редактирования, удаления сущностей с хранилища на сервере.
+
+```javascript
+let s = 12;
+return console.log(s);
+```
+
+[![s](http://www.dmitrysmor.ru/upload/images/big/100_velikih-89.jpg)](https://www.google.com/)
